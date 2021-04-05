@@ -1,24 +1,63 @@
-# README
+## Users
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+|Column                | Type     | Options                   |
+|----------------------|--------- |---------------------------|
+| nickname             | string   | null: false               |
+| email                | string   | null: false, unique: true |
+| encrypted_password   | string   | null: false               |
+| first-name           | string   | null: false               |
+| first-name-furigana  | string   | null: false               |
+| last-name            | string   | null: false               |
+| last-name-furigana   | string   | null: false               |
+| birth-date           | date     | null: false               |
 
-Things you may want to cover:
 
-* Ruby version
+### Association
+has_many items
+has_many purchases
 
-* System dependencies
+## items
 
-* Configuration
+|Column            |Type        |Options                         |
+|------------------|------------|--------------------------------|
+| name             | string     | null: false                    |
+| description      | text       | null: false                    |
+| category_id      | integer    | null: false                    |
+| state_id         | integer    | null: false                    |
+| delivery-fee_id  | integer    | null: false                    |
+| area_id          | integer    | null: false                    |
+| delivery-time_id | integer    | null: false                    |
+| price            | integer    | null: false                    |
+| user             | references | null: false, foreign_key: true |
 
-* Database creation
 
-* Database initialization
+### Association
+has_one purchase
+belongs_to user
 
-* How to run the test suite
+## purchases
 
-* Services (job queues, cache servers, search engines, etc.)
+|Column|Type         |Options                         |
+|------|-------------|--------------------------------|
+| user | references  | null: false, foreign_key: true |
+| item | references  | null: false, foreign_key: true |
 
-* Deployment instructions
+### Association
+belongs_to user
+belongs_to item
+has_one address
 
-* ...
+## addresses
+
+|Column        |Type        |Options                        |
+|--------------|------------|-------------------------------|
+| postal-code  | string     | null: false                   |
+| area_id      | integer    | null: false                   |
+| municipality | string     | null: false                   |
+| address      | string     | null: false                   |
+| building     | string     |                               |
+| phone-number | string     | null: false                   |
+| purchase     | references | null: false, foreign_key: true|
+
+### Association
+belongs_to purchase

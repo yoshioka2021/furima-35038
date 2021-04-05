@@ -1,24 +1,60 @@
-# README
+## Users
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+|Column      | Type   | Options                   |
+|------------|------- |---------------------------|
+| nickname   | string | null: false               |
+| email      | string | null: false, unique: true |
+| password   | string | null: false               |
+| first-name | string | null: false               |
+| last-name  | string | null: false               |
+| birth-date | string | null: false               |
 
-Things you may want to cover:
 
-* Ruby version
+### Association
+has_many items
+has_many purchases
 
-* System dependencies
+## items
 
-* Configuration
+|Column|Type|Options|
+|---------------|------------|--------------------------------|
+| name          | string     | null: false                    |
+| description   | text       | null: false                    |
+| category      | string     | null: false                    |
+| state         | string     | null: false                    |
+| delivery-fee  | string     | null: false                    |
+| area          | string     | null: false                    |
+| delivery-time | string     | null: false                    |
+| price         | integer    | null: false                    |
+| user          | references | null: false, foreign_key: true |
 
-* Database creation
 
-* Database initialization
+### Association
+has_one item
+belongs_to user
 
-* How to run the test suite
+## purchases
 
-* Services (job queues, cache servers, search engines, etc.)
+|Column|Type         |Options                         |
+|------|-------------|--------------------------------|
+| user | references  | null: false, foreign_key: true |
+| item | references  | null: false, foreign_key: true |
 
-* Deployment instructions
+### Association
+belongs_to user
+belongs_to item
+has_one address
 
-* ...
+## addresses
+
+|Column|Type|Options|
+|------|----|-------|
+| postal-code  | string | null: false                   |
+| prefecture   | string | null: false                   |
+| address      | string | null: false                   |
+| building     | string | null: false                   |
+| phone-number | string | null: false                   |
+| purchase     | string | null: false, foreign_key: true|
+
+### Association
+belongs_to purchase

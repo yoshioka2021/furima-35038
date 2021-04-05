@@ -9,7 +9,7 @@
 | first-name-furigana  | string   | null: false               |
 | last-name            | string   | null: false               |
 | last-name-furigana   | string   | null: false               |
-| birth-date           | datetime | null: false               |
+| birth-date           | date     | null: false               |
 
 
 ### Association
@@ -53,6 +53,7 @@ has_one address
 |--------------|------------|-------------------------------|
 | postal-code  | string     | null: false                   |
 | area_id      | integer    | null: false                   |
+| municipality | string     | null: false                   |
 | address      | string     | null: false                   |
 | building     | string     |                               |
 | phone-number | string     | null: false                   |

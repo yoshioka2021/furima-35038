@@ -4,11 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :encrypted_password, format: {with:/[a-z\d]{6,}/i}
+  validates :password, format: {with:/[a-z\d]{6,}/i}
   validates :nickname, presence: true
   validates :first_name, presence: true, format: {with:/\A[ぁ-んァ-ヶ一-龥々ー]+\z/}
   validates :first_name_furigana, presence: true, format: {with:/\A^[ァ-ンヴー]+$+\z/}
-  validates :last_name, presence: true
+  validates :last_name, presence: true, format: {with:/\A[ぁ-んァ-ヶ一-龥々ー]+\z/}
   validates :last_name_furigana, presence: true, format: {with:/\A^[ァ-ンヴー]+$+\z/}
   validates :birth_date, presence: true
 end

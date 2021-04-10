@@ -100,10 +100,10 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is invalid')
       end
-      it "パスワードは@が含まれていない場合登録できない" do
-        @user.password = "a.a"
+      it 'パスワードは@が含まれていない場合登録できない' do
+        @user.password = 'a.a'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
     end
   end

@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit]
-  before_action :set_item_id, only: [:show,:edit,:update]
+  before_action :set_item_id, only: [:show, :edit, :update]
   before_action :move_to_index, only: [:show]
 
   def index
@@ -46,8 +46,6 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    unless user_signed_in? && current_user.id == @item.user_id
-      redirect_to action: :index
-    end
+    redirect_to action: :index unless user_signed_in? && current_user.id == @item.user_id
   end
 end

@@ -1,13 +1,10 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!, except: :index
   before_action :set_item_id, only: [:index,:create]
+  before_action :purchase_present, only: [:index,:create]
 
   def index
-    if @item.purchase.present? || @item.user_id == current_user.id
-      redirect_to root_path
-    else
-      @purchase_address = PurchaseAddress.new
-    end
+    @purchase_address = PurchaseAddress.new
   end
 
   def create
@@ -38,5 +35,11 @@ class PurchasesController < ApplicationController
         card: purchase_params[:token],
         currency: 'jpy'
       )
+  end
+
+  def purchase_present
+    if @item.purchase.present? || @item.user_id == current_user.id
+      redirect_to root_path
+    end
   end
 end

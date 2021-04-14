@@ -3,7 +3,12 @@ class PurchasesController < ApplicationController
   before_action :set_item_id, only: [:index,:create]
 
   def index
-    @purchase_address = PurchaseAddress.new
+    binding.pry
+    if @item.purchase.present? || @item.user_id == current_user.id
+      redirect_to root_path
+    else
+      @purchase_address = PurchaseAddress.new
+    end
   end
 
   def create
@@ -24,7 +29,7 @@ class PurchasesController < ApplicationController
   end
 
   def set_item_id
-    @item = Item.find(params[:item_id])
+    @item = Item.find(params[:item_id],params[:user_id])
   end
 
   def pay_item

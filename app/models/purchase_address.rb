@@ -1,7 +1,6 @@
 class PurchaseAddress
   include ActiveModel::Model
-  attr_accessor :postal_code,:area_id,:municipality,:address,:building,:phone_number,:purchase_id,:user_id,:item_id
-
+  attr_accessor :postal_code,:area_id,:municipality,:address,:building,:phone_number,:purchase_id,:user_id,:item_id,:token
   with_options presence: true do
     validates :postal_code
     validates :area_id
@@ -9,6 +8,7 @@ class PurchaseAddress
     validates :address
     validates :phone_number
     validates :user_id
+    validates :token
   end
 
   def save

@@ -9,6 +9,10 @@ RSpec.describe PurchaseAddress, type: :model do
       it '全て正しく入力すれば購入ができる' do
         expect(@purchase_address).to be_valid
       end
+      it '建物番号が空でも購入できる' do
+        @purchase_address.building = ""
+        expect(@purchase_address).to be_valid
+      end
     end
     context '購入できないとき' do
       it '郵便番号がないと購入できない' do

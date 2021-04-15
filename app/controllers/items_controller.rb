@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_item_id, only: [:show, :edit, :update, :destroy]
-  before_action :move_to_index, only: [:edit, :update,:destroy]
-  before_action :purchase_present, only: [:edit,:update,:destroy]
+  before_action :move_to_index, only: [:edit, :update, :destroy]
+  before_action :purchase_present, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.all.order(created_at: :desc)
@@ -36,9 +36,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if @item.destroy
-      redirect_to root_path
-    end
+    redirect_to root_path if @item.destroy
   end
 
   private
@@ -57,8 +55,6 @@ class ItemsController < ApplicationController
   end
 
   def purchase_present
-    if @item.purchase.present?
-      redirect_to root_path
-    end
+    redirect_to root_path if @item.purchase.present?
   end
 end

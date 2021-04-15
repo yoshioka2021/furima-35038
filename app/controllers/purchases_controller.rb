@@ -1,5 +1,5 @@
 class PurchasesController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!
   before_action :set_item_id, only: [:index,:create]
   before_action :purchase_present, only: [:index,:create]
 
